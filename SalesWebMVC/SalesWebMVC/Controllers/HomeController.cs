@@ -8,6 +8,7 @@ namespace SalesWebMVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Message"] = "Sales System - ASP .NET in C#";
             return View();
         }
 
