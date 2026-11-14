@@ -2,7 +2,9 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("SalesWebMVCContext") ?? throw new InvalidOperationException("Connection string 'SalesWebMVCContext' not found.");
 
-builder.Services.AddDbContext<SalesWebMVCContext>(options => options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<SalesWebMVCContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<SalesWebMVCContext>(options => 
+    options.UseMySQL(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
