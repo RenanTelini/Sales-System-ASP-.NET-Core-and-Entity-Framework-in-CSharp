@@ -1,4 +1,4 @@
-﻿@model SalesWebMVC.Models.Seller
+﻿@model SalesWebMVC.Models.ViewModels.SellerFormViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,20 +12,26 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Name" class="form-label mt-2"></label>
-                <input asp-for="Name" class="form-control" placeholder="Seller name" />
+                <label asp-for="Seller.Name" class="form-label mt-2"></label>
+                <input asp-for="Seller.Name" class="form-control" placeholder="Seller name" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="form-label mt-2"></label>
-                <input asp-for="Email" class="form-control" placeholder="Enter email">
+                <label asp-for="Seller.Email" class="form-label mt-2"></label>
+                <input asp-for="Seller.Email" class="form-control" placeholder="Enter email">
             </div>
             <div class="form-group">
-                <label asp-for="BirthDate" class="form-label mt-2"></label>
-                <input asp-for="BirthDate" class="form-control" />
+                <label asp-for="Seller.BirthDate" class="form-label mt-2"></label>
+                <input asp-for="Seller.BirthDate" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="BaseSalary" class="form-label mt-2"></label>
-                <input asp-for="BaseSalary" class="form-control" placeholder="0.00" />
+                <label asp-for="Seller.BaseSalary" class="form-label mt-2"></label>
+                <input asp-for="Seller.BaseSalary" class="form-control" placeholder="0.00" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.DepartmentId" class="control-label"></label>
+                <select asp-for="Seller.DepartmentId" asp-items="@(new SelectList(Model.Departments,
+                        nameof(Department.Id), nameof(Department.Name)))" class= "form-select" >
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary form-label mt-2" />
