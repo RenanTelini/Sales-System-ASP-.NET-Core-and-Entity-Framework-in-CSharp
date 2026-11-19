@@ -3,6 +3,8 @@ using System.Diagnostics;
 using SalesWebMVC.Services;
 using Microsoft.AspNetCore.Mvc;
 using SalesWebMVC.Models.ViewModels;
+using SalesWebMVC.Services.Exceptions;
+using System.Data.Common;
 
 namespace SalesWebMVC.Controllers
 {
@@ -61,8 +63,15 @@ namespace SalesWebMVC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _sellerService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _sellerService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
         public IActionResult Details(int? id)
